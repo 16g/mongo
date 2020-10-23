@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./mongod.conf:/etc/mongod.conf
+      - ./entrypoint.sh:/docker-entrypoint-initdb.d/entrypoint.sh
+      - mongodb-volume:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: maindb
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: hhfhsdFHo16Gojhg
+      MONGO_URL: 'mongodb://mongo:27017'
+#    ports:
+#      - 37018:27017
+
+volumes:
+  mongodb-volume:
+    external:
+      name: mongodb_data
+
+networks:
+  default:
+    external:
+      name: xxx
